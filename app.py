@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///base.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db.SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 
 class Departments(db.Model):
@@ -41,35 +41,40 @@ class Orders(db.Model):
 def index():
     return render_template("index.html")
 
+@app.route('/all_departments')
+def all_departments():
+    departments = Departments.query.order_by(Departments.department_name).all()
+    return render_template('departments.html', departments=departments)
+
 
 @app.route("/create_department", methods=["POST", "GET"])
 def create_department():
     if request.method == 'POST':
-        department_name = request.form['name']
+        department_name = request.form['department_name']
         department_profile = Departments(department_name=department_name)
         try:
-            db.session.add(article)
+            db.session.add(department_profile)
             db.session.commit()
-            return redirect('/')
+            return redirect('/departments')
         except:
             return "Some Trouble"
     else:
-        return render_template("departments.html")
+        return render_template("create_department.html")
 
 
-@app.route('/departments/<string:name>/<int:id>')
+@app.route('/department/<string:name>/<int:id>')
 def departments(name, id):
-    return "departments: " + name + " - " + str(id)
+    return "department: " + name + " - " + str(id)
 
 
-@app.route('/employees/<string:name>/<int:id>')
-def employees():
-    return render_template("index.html")
-
-
-@app.route('/orders/<string:name>/<int:id>')
-def orders():
-    return render_template("index.html")
+# @app.route('/employees/<string:name>/<int:id>')
+# def employees():
+#     return render_template("index.html")
+#
+#
+# @app.route('/orders/<string:name>/<int:id>')
+# def orders():
+#     return render_template("index.html")
 
 
 @app.route('/about')

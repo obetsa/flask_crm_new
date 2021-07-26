@@ -2,19 +2,18 @@
 
 
 {% block title %}
-CRM
+CRM Departments
 {% endblock %}
 
 
 {% block body %}
-<div class="container mt-5">
     <h1>Departments</h1>
-    <form method="post">
-        <input type="text" name="title" id="title" class="form-control" placeholder="Name"><br>
-<!--        <textarea name="intro" id="intro" class="form-control"></textarea><br>-->
-<!--        <textarea name="intro" id="text" class="form-control"></textarea><br>-->
-        <input type="submit" class="btn btn-success" value="Create">
-    </form>
+{% for dep in departments %}
+    <div class="alert alert-info">
+        <h2>{{ dep.department_name }}</h2>
+    </div>
 
-</div>
+{% endfor %}
+
+
 {% endblock %}
