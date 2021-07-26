@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -6,6 +6,8 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///base.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.SQLAlchemy(app)
 
 
 class Departments(db.Model):
@@ -42,7 +44,17 @@ def index():
 
 @app.route("/create_department", methods=["POST", "GET"])
 def create_department():
-    return render_template("departments.html")
+    if request.method == 'POST':
+        department_name = request.form['name']
+        department_profile = Departments(department_name=department_name)
+        try:
+            db.session.add(article)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Some Trouble"
+    else:
+        return render_template("departments.html")
 
 
 @app.route('/departments/<string:name>/<int:id>')
