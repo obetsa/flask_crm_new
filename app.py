@@ -1,11 +1,11 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///base.db'
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 class Departments(db.Model):
@@ -40,9 +40,9 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/about')
-def about():
-    return render_template("about.html")
+@app.route("/create_department", methods=["POST", "GET"])
+def create_department():
+    return render_template("departments.html")
 
 
 @app.route('/departments/<string:name>/<int:id>')
@@ -58,6 +58,11 @@ def employees():
 @app.route('/orders/<string:name>/<int:id>')
 def orders():
     return render_template("index.html")
+
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 
 if __name__ == "__main__":
