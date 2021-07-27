@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+CRM Orders
+{% endblock %}
+
+
+{% block body %}
+    <h1>Orders</h1>
+{% for order in orders %}
+    <div class="alert alert-info">
+        <h2>{{ order.order_type }}</h2>
+        <p>{{ order.status }}</p>
+        <p><b>Date: {{ order.create_dt }}</b></p>
+        <a href="/order/{{ order.order_id }}" class="btn btn-warning">Info</a>
+    </div>
+
+{% endfor %}
+
+{% endblock %}

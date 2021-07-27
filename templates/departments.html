@@ -8,12 +8,17 @@ CRM Departments
 
 {% block body %}
     <h1>Departments</h1>
-{% for dep in departments %}
-    <div class="alert alert-info">
-        <h2>{{ dep.department_name }}</h2>
-    </div>
+    {% if departments|length > 0 %}
+    {% for dep in departments %}
+        <div class="alert alert-info">
+            <h2>{{ dep.department_name }}</h2>
+            <a href="/department/{{ dep.department_id }}" class="btn btn-warning">Detail</a>
+        </div>
 
-{% endfor %}
+    {% endfor %}
+    {% else %}
+        <p>Nothing There</p>
+    {% endif %}
 
 
 {% endblock %}

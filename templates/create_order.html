@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+CRM
+{% endblock %}
+
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Order</h1>
+    <form method="post">
+        <input type="text" name="order_type" id="order_type" class="form-control" placeholder="Order type"><br>
+        <textarea name="status" id="status" class="form-control" placeholder="Status"></textarea><br>
+        <textarea name="serial_no" id="serial_no" class="form-control" placeholder="Serial no"></textarea><br>
+        <textarea name="descriptions" id="descriptions" class="form-control" placeholder="Descriptions"></textarea><br>
+        <textarea name="creator_id" id="creator_id" class="form-control" placeholder="creator_id"></textarea><br>
+        <input type="submit" class="btn btn-success" value="Create">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{{ department.department_name }}
+
+{% endblock %}
+
+
+{% block body %}
+
+  <h1>{{ department.department_name }}</h1>
+  <div class="alert alert-info">
+    <p>ID: {{ department.department_id }}</p>
+    <a href="/department/{{ department.department_id }}/delete" class="btn btn-danger">Delete</a>
+    <a href="/department/{{ department.department_id }}/update" class="btn btn-success">Change</a>
+  </div>
+
+{% endblock %}
