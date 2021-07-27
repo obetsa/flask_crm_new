@@ -15,6 +15,7 @@ class Employees(db.Model):
     fio = db.Column(db.String(50), nullable=False, unique=True)
     position = db.Column(db.String(75))
     department_id = db.Column(db.Integer, db.ForeignKey('departments.department_id'), nullable=False)
+    department = db.relationship('Departments', backref=db.backref('department', lazy='dynamic'))
 
     def __repr__(self):
         return '<Employees %r>' % self.employee_id
@@ -29,6 +30,7 @@ class Orders(db.Model):
     status = db.Column(db.String(10), nullable=False)
     serial_no = db.Column(db.Integer, nullable=False, unique=True)
     creator_id = db.Column(db.Integer, db.ForeignKey('employees.employee_id'), nullable=False)
+    employee = db.relationship('Employees', backref=db.backref('employee', lazy='dynamic'))
 
     def __repr__(self):
         return '<Orders %r>' % self.order_id
