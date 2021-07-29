@@ -8,6 +8,7 @@ CRM Orders
 
 {% block body %}
     <h1>Orders</h1>
+{% if orders|length > 0 %}
 {% for order in orders %}
     <div class="alert alert-info">
         <h2>{{ order.order_type }}</h2>
@@ -16,6 +17,10 @@ CRM Orders
         <a href="/order/{{ order.order_id }}" class="btn btn-warning">Info</a>
     </div>
 
-{% endfor %}
+    {% endfor %}
+    {% else %}
+        <p>Nothing There</p>
+    {% endif %}
+
 
 {% endblock %}

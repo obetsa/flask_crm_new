@@ -8,6 +8,7 @@ CRM Employees
 
 {% block body %}
     <h1>Employees</h1>
+{% if employees|length > 0 %}
 {% for emp in employees %}
     <div class="alert alert-info">
       <h2>{{ emp.fio }}</h2>
@@ -16,5 +17,8 @@ CRM Employees
     </div>
 
 {% endfor %}
+{% else %}
+    <p>Nothing There</p>
+{% endif %}
 
 {% endblock %}

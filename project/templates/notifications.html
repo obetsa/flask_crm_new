@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+NotificationTasks
+{% endblock %}
+
+{% block body %}
+    <h1>Notification Tasks from Customers</h1>
+    {% if notifications|length > 0 %}
+    {% for nt in notifications %}
+        <div class="alert alert-info">
+            <h2>{{ nt.name }}</h2>
+            <p>{{ nt.message }}</p>
+            <p><b>Date: {{ nt.create_dt }}</b></p>
+        </div>
+
+    {% endfor %}
+    {% else %}
+        <p>Nothing There</p>
+    {% endif %}
+
+
+{% endblock %}

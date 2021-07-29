@@ -1,6 +1,6 @@
 from project import app, db
 from flask import render_template, url_for, request, redirect
-from project.models import Departments, Employees, Orders
+from project.models import Departments, Employees, Orders, NotificationTasks
 
 
 @app.route('/')
@@ -180,6 +180,12 @@ def order_delete(order_id):
         return redirect('/all_orders')
     except:
         return "Some Trouble"
+
+
+@app.route('/all_notifications')
+def all_notifications():
+    notifications = NotificationTasks.query.order_by(NotificationTasks.create_dt.desc()).all()
+    return render_template('notifications.html', notifications=notifications)
 
 
 @app.route('/about')
