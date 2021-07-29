@@ -1,6 +1,6 @@
 from project import app, db
 from flask import render_template, url_for, request, redirect
-from project.models import Departments, Employees, Orders, NotificationTasks
+from project.models import Departments, Employees, Orders, NotificationTasks, Customers
 
 
 @app.route('/')
@@ -186,6 +186,12 @@ def order_delete(order_id):
 def all_notifications():
     notifications = NotificationTasks.query.order_by(NotificationTasks.create_dt.desc()).all()
     return render_template('notifications.html', notifications=notifications)
+
+
+@app.route('/all_customers')
+def all_customers():
+    customers = Customers.query.order_by(Customers.c_name).all()
+    return render_template('customers.html', customers=customers)
 
 
 @app.route('/about')

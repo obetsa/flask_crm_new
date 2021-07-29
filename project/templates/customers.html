@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Customers
+{% endblock %}
+
+
+{% block body %}
+    <h1>Customers</h1>
+{% if customers|length > 0 %}
+{% for cus in customers %}
+    <div class="alert alert-info">
+      <h2>{{ cus.c_name }}</h2>
+      <p>{{ cus.password }}</p>
+      <p>{{ cus.phone }}</p>
+      <p>{{ cus.email }}</p>
+      <p>{{ cus.created_dt }}</p>
+<!--      <a href="/customers/{{ cus.customer_id }}" class="btn btn-warning">Info</a>-->
+    </div>
+
+{% endfor %}
+{% else %}
+    <p>Nothing There</p>
+{% endif %}
+
+{% endblock %}
